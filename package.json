@@ -1,19 +1,66 @@
 {
   "name": "react-cytoscapejs",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "0.0.0",
+  "description": "React-based network visualization component, using Cytoscape",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/plotly/react-cytoscapejs.git"
+    "url": "https://github.com/plotly/react-cytoscapejs.git"
   },
-  "author": "",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/plotly/react-cytoscapejs/issues"
   },
-  "homepage": "https://github.com/plotly/react-cytoscapejs#readme"
+  "homepage": "https://github.com/plotly/react-cytoscapejs",
+  "main": "./build/bundle.js",
+  "scripts": {
+    "prepare": "run-s build:prod",
+    "bundle": "webpack",
+    "build:dev": "cross-env NODE_ENV=development run-s bundle",
+    "build:prod": "cross-env NODE_ENV=production run-s bundle",
+    "clean": "rimraf dist/*",
+    "test:eslint": "eslint src/**",
+    "test:eslint:fix": "eslint --fix src/**",
+    "test:prettier": "prettier --list-different src/**",
+    "test:prettier:fix": "prettier --write src/**",
+    "test:mocha": "mocha-chrome test/index.html",
+    "test": "run-s test:*",
+    "watch": "cross-env NODE_ENV=development webpack-serve webpack.config.js",
+    "start": "run-s watch",
+    "demo": "cross-env NODE_ENV=development webpack-serve webpack.config.js --open --open-path demo.html"
+  },
+  "peerDependencies": {
+    "react": ">=15.0.0",
+    "react-dom": ">=15.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "chai": "^4.1.2",
+    "cross-env": "^5.0.0",
+    "eslint": "^4.6.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^5.2.0",
+    "mocha-chrome": "^1.1.0",
+    "npm-run-all": "^4.1.1",
+    "prettier": "^1.13.7",
+    "rimraf": "^2.6.2",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-serve": "^1.0.4"
+  },
+  "engines": {
+    "node": ">=8.11.3"
+  },
+  "dependencies": {
+    "cytoscape": "^3.2.14",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  }
 }

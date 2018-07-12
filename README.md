@@ -1,3 +1,3 @@
-# react-cytoscape.js
+# react-cytoscapejs
 
-## CURRENTLY WIP
+WIP

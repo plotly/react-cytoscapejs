@@ -1,0 +1,30 @@
+<!doctype>
+<html>
+  <!-- Entrypoint for mocha-chrome tests  -->
+  <head>
+    <title>Test</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/react/umd/react.development.js"></script>
+    <script src="../node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="../node_modules/cytoscape/dist/cytoscape.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <div id="mocha"></div>
+
+    <script>
+      expect = chai.expect;
+    </script>
+
+    <!-- Add refs to test/*.js files here: -->
+    <script src="example.js"></script>
+
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>

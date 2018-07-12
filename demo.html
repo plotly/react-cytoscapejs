@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+  <!-- Use `npm run demo` to view the demo -->
+
+  <head>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="../node_modules/cytoscape/dist/cytoscape.min.js"></script>
+    <script src="bundle.js"></script>
+
+    <title>react-network demo</title>
+
+    <style>
+      body {
+        font: 14pt helvetica neue, helvetica, sans-serif;
+        padding: 0;
+        margin: 1em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>react-network demo</h1>
+
+    <div id="root"></div>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function(){
+        ReactDOM.render(
+          React.createElement(ReactNetwork, {
+            id: 'cy2',
+            className: 'foo bar',
+            style: {
+              'border': '1px solid #ccc',
+              'width': '600px',
+              'height': '600px'
+            },
+            global: 'cy',
+            elements: [
+              { data: { id: 'hello', label: 'hello world' } }
+            ]
+          }),
+          document.getElementById('root')
+        );
+      });
+    </script>
+  </body>
+
+</html>
