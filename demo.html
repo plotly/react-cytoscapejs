@@ -1,50 +1,95 @@
 <!DOCTYPE html>
 <html>
 
-  <!-- Use `npm run demo` to view the demo -->
+<!-- Use `npm run demo` to view the demo -->
 
-  <head>
-    <script src="node_modules/react/umd/react.development.js"></script>
-    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
-    <script src="../node_modules/cytoscape/dist/cytoscape.min.js"></script>
-    <script src="bundle.js"></script>
+<head>
+  <script src="node_modules/react/umd/react.development.js"></script>
+  <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+  <script src="../node_modules/cytoscape/dist/cytoscape.min.js"></script>
+  <script src="react-cytoscape.js"></script>
 
-    <title>react-network demo</title>
+  <title>react-cytoscapejs demo</title>
 
-    <style>
-      body {
-        font: 14pt helvetica neue, helvetica, sans-serif;
-        padding: 0;
-        margin: 1em;
+  <style>
+    body {
+      font: 14pt helvetica neue, helvetica, sans-serif;
+      padding: 0;
+      margin: 1em;
+    }
+
+    #root {
+      display: inline-block;
+    }
+
+    #props {
+      font-family: monospace;
+      width: 400px;
+      height: 400px;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>react-cytoscapejs demo</h1>
+
+  <div id="root"></div>
+  <textarea id="props"></textarea>
+  <button id="update">Render</button>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      const exampleProps = {
+        id: 'cy',
+        className: 'foo bar',
+        style: {
+          'border': '1px solid #ccc',
+          'width': '400px',
+          'height': '400px'
+        },
+        global: 'cy',
+        elements: [
+          { data: { id: 'a', label: 'apple' }, position: { x: 0, y: 0 } },
+          { data: { id: 'b', label: 'banana' }, position: { x: 100, y: 0 } },
+          { data: { id: 'c', label: 'cherry' }, position: { x: 200, y: 0 } }
+        ],
+        layout: {
+          name: 'preset'
+        }
+      };
+
+      class TestComponent extends React.Component {
+        constructor(props) {
+          super(props);
+
+          props.setStateRef(this.setState.bind(this));
+
+          this.state = exampleProps;
+        }
+
+        render() {
+          return React.createElement(ReactCytoscape, this.state);
+        }
       }
-    </style>
-  </head>
 
-  <body>
-    <h1>react-network demo</h1>
+      const textBox = document.getElementById('props');
+      const btn = document.getElementById('update');
 
-    <div id="root"></div>
-
-    <script>
-      window.addEventListener('DOMContentLoaded', function(){
-        ReactDOM.render(
-          React.createElement(ReactNetwork, {
-            id: 'cy2',
-            className: 'foo bar',
-            style: {
-              'border': '1px solid #ccc',
-              'width': '600px',
-              'height': '600px'
-            },
-            global: 'cy',
-            elements: [
-              { data: { id: 'hello', label: 'hello world' } }
-            ]
-          }),
-          document.getElementById('root')
-        );
+      btn.addEventListener('click', () => {
+        update(JSON.parse(textBox.value));
       });
-    </script>
-  </body>
+
+      let update;
+
+      ReactDOM.render(
+        React.createElement(TestComponent, { setStateRef: ref => update = ref }),
+        document.getElementById('root')
+      );
+
+      textBox.value = JSON.stringify(exampleProps, null, 2);
+    });
+  </script>
+</body>
 
 </html>

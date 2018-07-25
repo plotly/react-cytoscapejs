@@ -2,6 +2,7 @@
   "name": "react-cytoscapejs",
   "version": "0.0.0",
   "description": "React-based network visualization component, using Cytoscape",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/plotly/react-cytoscapejs.git"
@@ -21,9 +22,10 @@
     "test:eslint:fix": "eslint --fix src/**",
     "test:prettier": "prettier --list-different src/**",
     "test:prettier:fix": "prettier --write src/**",
-    "test:mocha": "mocha-chrome test/index.html",
+    "test:mocha": "run-s bundle test:mocha:run",
+    "test:mocha:run": "mocha-chrome test/index.html",
     "test": "run-s test:*",
-    "watch": "cross-env NODE_ENV=development webpack-serve webpack.config.js",
+    "watch": "cross-env NODE_ENV=development webpack --watch --config webpack.config.js",
     "start": "run-s watch",
     "demo": "cross-env NODE_ENV=development webpack-serve webpack.config.js --open --open-path demo.html"
   },
@@ -49,6 +51,8 @@
     "mocha-chrome": "^1.1.0",
     "npm-run-all": "^4.1.1",
     "prettier": "^1.13.7",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "rimraf": "^2.6.2",
     "webpack": "^4.15.1",
     "webpack-cli": "^3.0.8",
@@ -59,8 +63,6 @@
     "node": ">=8.11.3"
   },
   "dependencies": {
-    "cytoscape": "^3.2.14",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "cytoscape": "^3.2.14"
   }
 }

@@ -12,20 +12,20 @@ let conf = {
       index: 'demo.html'
     }
   },
-  
+
   devtool: isProd ? false : 'inline-source-map',
 
   entry: './src/index.js',
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-    library: 'ReactNetwork',
+    filename: 'react-cytoscape.js',
+    library: 'ReactCytoscape',
     libraryTarget: 'umd'
   },
 
   externals: {
-    'react': {
+    react: {
       commonjs: 'react',
       commonjs2: 'react',
       amd: 'react',
@@ -37,18 +37,14 @@ let conf = {
       amd: 'react-dom',
       root: 'ReactDOM'
     },
-    'cytoscape': 'cytoscape'
+    cytoscape: 'cytoscape'
   },
 
   module: {
-    rules: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
-    ]
+    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }]
   },
 
-  plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV'])
-  ]
+  plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])]
 };
 
 module.exports = conf;
