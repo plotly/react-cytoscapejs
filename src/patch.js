@@ -108,7 +108,7 @@ const patchElements = (cy, eles1, eles2, toJson, get, forEach, diff) => {
     if (eles1HasId(id)) {
       toPatch.push({ ele1, ele2 });
     } else {
-      toAdd.push(ele2);
+      toAdd.push(toJson(ele2));
     }
   });
 

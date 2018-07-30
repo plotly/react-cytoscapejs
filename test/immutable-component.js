@@ -1,38 +1,51 @@
-/* global expect, ReactDOM, React, ReactCytoscape, cy */
+/* global expect, ReactDOM, React, ReactCytoscape, cy, Immutable */
 
 (function() {
-  const defaults = {
+  const { Map, List } = Immutable;
+
+  const isImmutable = obj => Map.isMap(obj) || List.isList(obj);
+
+  const cloneDefaults = () => ({
+    // dom
     global: 'cy',
     id: 'cy',
     style: { width: '500px', height: '500px' },
+
+    // cy
     zoom: 1,
-    pan: {
+    pan: Map({
       x: 0,
       y: 0
-    },
-    elements: [
-      {
-        data: { id: 'a', label: 'apple' },
-        position: { x: 0, y: 0 },
-        scratch: { _test: 1 },
+    }),
+    elements: List([
+      Map({
+        data: Map({ id: 'a', label: 'apple' }),
+        position: Map({ x: 0, y: 0 }),
+        scratch: Map({ _test: 1 }),
         classes: 'foo bar'
-      },
-      {
-        data: { id: 'b', label: 'banana' },
-        position: { x: 0, y: 0 },
-        scratch: { _test: 2 },
+      }),
+      Map({
+        data: Map({ id: 'b', label: 'banana' }),
+        position: Map({ x: 0, y: 0 }),
+        scratch: Map({ _test: 2 }),
         classes: 'foo bar'
-      },
-      {
-        data: { id: 'c', label: 'cherry' },
-        position: { x: 0, y: 0 },
-        scratch: { _test: 3 },
+      }),
+      Map({
+        data: Map({ id: 'c', label: 'cherry' }),
+        position: Map({ x: 0, y: 0 }),
+        scratch: Map({ _test: 3 }),
         classes: 'foo bar'
-      }
-    ]
-  };
+      })
+    ]),
 
-  const cloneDefaults = () => JSON.parse(JSON.stringify(defaults));
+    // diff-patch config
+    diff: (objA, objB) => objA !== objB,
+    toJson: obj => (isImmutable(obj) ? obj.toJSON() : obj),
+    get: (obj, key) => (isImmutable(obj) ? obj.get(key) : obj[key]),
+    forEach: (list, iterator) => list.forEach(iterator)
+  });
+
+  const defaults = cloneDefaults();
 
   /**
    * The TestComponent drives updates to the ReactCytoscape component.  Updates
@@ -53,14 +66,16 @@
     }
   }
 
-  describe('Component', function() {
+  describe('Immutable component', function() {
     let root, setState, json;
 
-    let updateCyProps = props =>
-      new Promise(resolve => setState(Object.assign({}, json, props), resolve));
+    let updateCyProps = newProps =>
+      new Promise(resolve => {
+        setState(newProps, resolve);
+      });
 
     beforeEach(function() {
-      json = cloneDefaults();
+      json = defaults;
 
       root = document.createElement('div');
 
@@ -89,18 +104,16 @@
     });
 
     it('updates stylesheet', function() {
-      return updateCyProps(
-        Object.assign(cloneDefaults(), {
-          stylesheet: [
-            {
-              selector: 'node',
-              style: {
-                width: '100px'
-              }
-            }
-          ]
-        })
-      ).then(() => {
+      return updateCyProps({
+        stylesheet: List([
+          Map({
+            selector: 'node',
+            style: Map({
+              width: '100px'
+            })
+          })
+        ])
+      }).then(() => {
         expect(
           cy
             .nodes()
@@ -111,12 +124,10 @@
     });
 
     it('adds an element', function() {
-      const elements = cloneDefaults().elements;
-
-      elements.push({ data: { id: 'd', label: 'date' } });
-
       return updateCyProps({
-        elements
+        elements: json.elements.push(
+          Map({ data: Map({ id: 'd', label: 'date' }) })
+        )
       }).then(() => {
         expect(cy.nodes().length).to.equal(4);
         expect(cy.getElementById('a').data('label')).to.equal('apple');
@@ -127,12 +138,8 @@
     });
 
     it('removes an element', function() {
-      const elements = cloneDefaults().elements;
-
-      elements.splice(1, 1); // remove b in index 1
-
       return updateCyProps({
-        elements
+        elements: json.elements.delete(1) // remove b in index 1
       }).then(() => {
         expect(cy.nodes().length).to.equal(2);
         expect(cy.getElementById('a').data('label')).to.equal('apple');
@@ -198,37 +205,24 @@
     });
 
     it('updates pan x', function() {
-      const pan = cloneDefaults().pan;
-
-      pan.x = 100;
-
       return updateCyProps({
-        pan
+        pan: json.pan.set('x', 100)
       }).then(() => {
         expect(cy.pan()).to.deep.equal({ x: 100, y: 0 });
       });
     });
 
     it('updates pan y', function() {
-      const pan = cloneDefaults().pan;
-
-      pan.y = 100;
-
       return updateCyProps({
-        pan
+        pan: json.pan.set('y', 100)
       }).then(() => {
         expect(cy.pan()).to.deep.equal({ x: 0, y: 100 });
       });
     });
 
     it('updates pan x and y', function() {
-      const pan = cloneDefaults().pan;
-
-      pan.x = 100;
-      pan.y = 200;
-
       return updateCyProps({
-        pan
+        pan: json.pan.set('x', 100).set('y', 200)
       }).then(() => {
         expect(cy.pan()).to.deep.equal({ x: 100, y: 200 });
       });
@@ -274,7 +268,7 @@
       });
     });
 
-    it('updates autolock state', function() {
+    it('updates autounselectify state', function() {
       return updateCyProps({
         autounselectify: true
       }).then(() => {
@@ -283,9 +277,11 @@
     });
 
     it('modifies element data', function() {
-      const elements = cloneDefaults().elements;
+      let elements = json.elements;
+      let a = elements.get(0);
 
-      elements[0].data.label = 'apricot';
+      a = a.set('data', a.get('data').set('label', 'apricot'));
+      elements = elements.set(0, a);
 
       return updateCyProps({
         elements
@@ -296,9 +292,11 @@
     });
 
     it('adds element data', function() {
-      const elements = cloneDefaults().elements;
+      let elements = json.elements;
+      let a = elements.get(0);
 
-      elements[0].data.foo = 'bar';
+      a = a.set('data', a.get('data').set('foo', 'bar'));
+      elements = elements.set(0, a);
 
       return updateCyProps({
         elements
@@ -312,9 +310,11 @@
     });
 
     it('modifies element scratch', function() {
-      const elements = cloneDefaults().elements;
+      let elements = json.elements;
+      let a = elements.get(0);
 
-      elements[0].scratch._test = 123;
+      a = a.set('scratch', a.get('scratch').set('_test', 123));
+      elements = elements.set(0, a);
 
       return updateCyProps({ elements }).then(() => {
         expect(cy.getElementById('a').scratch('_test')).to.equal(123);
@@ -322,9 +322,11 @@
     });
 
     it('adds element scratch', function() {
-      const elements = cloneDefaults().elements;
+      let elements = json.elements;
+      let a = elements.get(0);
 
-      elements[0].scratch._test2 = 123;
+      a = a.set('scratch', a.get('scratch').set('_test2', 123));
+      elements = elements.set(0, a);
 
       return updateCyProps({ elements }).then(() => {
         // a is updated
@@ -336,11 +338,17 @@
     });
 
     it('updates element position', function() {
-      const elements = cloneDefaults().elements;
-      const position = elements[0].position;
+      let elements = json.elements;
+      let a = elements.get(0);
 
-      position.x = 123;
-      position.y = 456;
+      a = a.set(
+        'position',
+        a
+          .get('position')
+          .set('x', 123)
+          .set('y', 456)
+      );
+      elements = elements.set(0, a);
 
       return updateCyProps({
         elements
@@ -353,9 +361,11 @@
     });
 
     it('updates element selection state', function() {
-      const elements = cloneDefaults().elements;
+      let elements = json.elements;
+      let a = elements.get(0);
 
-      elements[0].selected = true;
+      a = a.set('selected', true);
+      elements = elements.set(0, a);
 
       return updateCyProps({
         elements
@@ -365,9 +375,11 @@
     });
 
     it('updates element selectable state', function() {
-      const elements = cloneDefaults().elements;
+      let elements = json.elements;
+      let a = elements.get(0);
 
-      elements[0].selectable = false;
+      a = a.set('selectable', false);
+      elements = elements.set(0, a);
 
       return updateCyProps({
         elements
@@ -377,9 +389,11 @@
     });
 
     it('updates element locked state', function() {
-      const elements = cloneDefaults().elements;
+      let elements = json.elements;
+      let a = elements.get(0);
 
-      elements[0].locked = true;
+      a = a.set('locked', true);
+      elements = elements.set(0, a);
 
       return updateCyProps({
         elements
@@ -389,9 +403,11 @@
     });
 
     it('updates element grabbable state', function() {
-      const elements = cloneDefaults().elements;
+      let elements = json.elements;
+      let a = elements.get(0);
 
-      elements[0].grabbable = false;
+      a = a.set('grabbable', false);
+      elements = elements.set(0, a);
 
       return updateCyProps({
         elements
@@ -401,9 +417,11 @@
     });
 
     it('updates element classes', function() {
-      const elements = cloneDefaults().elements;
+      let elements = json.elements;
+      let a = elements.get(0);
 
-      elements[0].classes = 'baz bat';
+      a = a.set('classes', 'baz bat');
+      elements = elements.set(0, a);
 
       return updateCyProps({
         elements

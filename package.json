@@ -17,6 +17,7 @@
     "bundle": "webpack",
     "build:dev": "cross-env NODE_ENV=development run-s bundle",
     "build:prod": "cross-env NODE_ENV=production run-s bundle",
+    "build:docgen": "react-docgen src/component.js --pretty -o dist/react-cytoscape.docgen.json",
     "clean": "rimraf dist/*",
     "test:eslint": "eslint src/**",
     "test:eslint:fix": "eslint --fix src/**",
@@ -47,11 +48,13 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
+    "immutable": "^3.8.2",
     "mocha": "^5.2.0",
     "mocha-chrome": "^1.1.0",
     "npm-run-all": "^4.1.1",
     "prettier": "^1.13.7",
     "react": "^16.4.1",
+    "react-docgen": "^2.21.0",
     "react-dom": "^16.4.1",
     "rimraf": "^2.6.2",
     "webpack": "^4.15.1",
@@ -63,6 +66,7 @@
     "node": ">=8.11.3"
   },
   "dependencies": {
-    "cytoscape": "^3.2.14"
+    "cytoscape": "^3.2.14",
+    "prop-types": "^15.6.2"
   }
 }

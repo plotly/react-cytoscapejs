@@ -1,10 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { types } from './types';
 import { defaults } from './defaults';
 import Cytoscape from 'cytoscape';
 import { patch } from './patch';
 
+/**
+ * The `CytoscapeComponent` is a React component that allows for the declarative creation
+ * and modification of a Cytoscape instance, a graph visualisation.
+ */
 export default class CytoscapeComponent extends React.Component {
+  static get propTypes() {
+    return types;
+  }
+
   static get defaultProps() {
     return defaults;
   }
@@ -33,6 +42,10 @@ export default class CytoscapeComponent extends React.Component {
     cy.batch(() => {
       patch(cy, prevProps, newProps, diff, toJson, get, forEach);
     });
+
+    if (newProps.cy != null) {
+      newProps.cy(cy);
+    }
   }
 
   componentDidUpdate(prevProps) {

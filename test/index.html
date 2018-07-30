@@ -10,7 +10,9 @@
   <script src="../node_modules/chai/chai.js"></script>
   <script src="../node_modules/react/umd/react.development.js"></script>
   <script src="../node_modules/react-dom/umd/react-dom.development.js"></script>
-  <script src="../node_modules/cytoscape/dist/cytoscape.min.js"></script>
+  <script src="../node_modules/cytoscape/dist/cytoscape.js"></script>
+  <script src="../node_modules/immutable/dist/immutable.js"></script>
+  <script src="../node_modules/prop-types/prop-types.js"></script>
   <script src="../dist/react-cytoscape.js"></script>
 </head>
 
@@ -19,10 +21,13 @@
 
   <script>
     expect = chai.expect;
+
+    mocha.setup('bdd');
   </script>
 
   <!-- Add refs to test/*.js files here: -->
   <script src="component.js"></script>
+  <script src="immutable-component.js"></script>
 
   <script>
     mocha.run();
