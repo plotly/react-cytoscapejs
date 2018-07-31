@@ -11,9 +11,9 @@
     "url": "https://github.com/plotly/react-cytoscapejs/issues"
   },
   "homepage": "https://github.com/plotly/react-cytoscapejs",
-  "main": "./build/bundle.js",
+  "main": "./dist/react-cytoscape.js",
   "scripts": {
-    "prepare": "run-s build:prod",
+    "prepare": "run-s build:prod build:docgen",
     "bundle": "webpack",
     "build:dev": "cross-env NODE_ENV=development run-s bundle",
     "build:prod": "cross-env NODE_ENV=production run-s bundle",
