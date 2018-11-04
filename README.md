@@ -25,7 +25,7 @@ class MyApp extends React.Component {
        { data: { source: 'one', target: 'two', label: 'Edge from Node1 to Node2' } }
     ];
 
-    return <CytoscapeComponent elements={elements} style="width: 600px; height: 600px;" />;
+    return <CytoscapeComponent elements={elements} style={ { width: '600px', height; '600px' } } />;
   }
 }
 
