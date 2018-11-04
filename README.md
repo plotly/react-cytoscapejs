@@ -281,3 +281,12 @@ The `cy` prop allows for getting a reference to the `cy` Cytoscape object, e.g.:
 ```jsx
 <CytoscapeComponent cy={cy => (myCyRef = cy)} />
 ```
+
+## Change log
+
+- v1.0.1
+  - Update style attribute in docs example to use idiomatic React style object
+  - Add npmignore
+- v1.0.0
+  - Initial release
+  
