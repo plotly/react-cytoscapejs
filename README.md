@@ -25,7 +25,7 @@ class MyApp extends React.Component {
        { data: { source: 'one', target: 'two', label: 'Edge from Node1 to Node2' } }
     ];
 
-    return <CytoscapeComponent elements={elements} style={ { width: '600px', height; '600px' } } />;
+    return <CytoscapeComponent elements={elements} style={ { width: '600px', height: '600px' } } />;
   }
 }
 
@@ -93,7 +93,7 @@ N.b. to use an external [layout extension](http://js.cytoscape.org/#extensions/l
 import Cytoscape from 'cytoscape';
 import COSEBilkent from 'cytoscape-cose-bilkent';
 import React from 'react';
-import CytoscapeComponent from 'cytoscape-reactjs';
+import CytoscapeComponent from 'react-cytoscapejs';
 
 Cytoscape.use(COSEBilkent);
 
