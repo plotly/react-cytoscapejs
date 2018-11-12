@@ -190,7 +190,7 @@ The [`class`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attribute
 
 ### `style`
 
-The [`style`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/style) attribute of the div containing CSS styles, e.g. `<CytoscapeComponent style="width: 600px; height: 600px;" />`.
+The [`style`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/style) attribute of the div containing CSS styles, e.g. `<CytoscapeComponent style={ { width: '600px', height: '600px' } } />`.
 
 ## Custom prop types
 
