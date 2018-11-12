@@ -304,6 +304,9 @@ The `cy` prop allows for getting a reference to the `cy` Cytoscape object, e.g.:
 
 ## Change log
 
+- v1.1.0
+  - Add `Component.normalizeElements()` utility function
+  - Update style prop docs
 - v1.0.1
   - Update style attribute in docs example to use idiomatic React style object
   - Add npmignore
