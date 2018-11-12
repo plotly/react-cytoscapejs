@@ -416,5 +416,36 @@
         expect(a.hasClass('bar')).to.be.false;
       });
     });
+
+    it('converts non-array elements', function() {
+      const elements = {
+        nodes: [{ data: { id: 'n0' } }, { data: { id: 'n1' } }],
+        edges: [{ data: { id: 'e', source: 'n0', target: 'n1' } }]
+      };
+
+      return updateCyProps({
+        elements: ReactCytoscape.normalizeElements(elements)
+      }).then(() => {
+        expect(cy.getElementById('n0').length).to.equal(1);
+        expect(cy.getElementById('n1').length).to.equal(1);
+        expect(cy.getElementById('e').length).to.equal(1);
+      });
+    });
+
+    it('maintains array elements', function() {
+      const elements = [
+        { data: { id: 'n0' } },
+        { data: { id: 'n1' } },
+        { data: { id: 'e', source: 'n0', target: 'n1' } }
+      ];
+
+      return updateCyProps({
+        elements: ReactCytoscape.normalizeElements(elements)
+      }).then(() => {
+        expect(cy.getElementById('n0').length).to.equal(1);
+        expect(cy.getElementById('n1').length).to.equal(1);
+        expect(cy.getElementById('e').length).to.equal(1);
+      });
+    });
   });
 })();

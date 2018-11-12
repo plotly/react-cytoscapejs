@@ -52,6 +52,26 @@ The flat list of [Cytoscape elements](http://js.cytoscape.org/#notation/elements
 
 N.b. arrays or objects should not be used in an `element`'s `data` or `scratch` fields, unless using a custom `diff()` prop.
 
+In order to make it easier to support passing in `elements` JSON in the `elements: { nodes: [], edges: [] }` format, there is a static function `CytoscapeComponent.normalizeElements()`.  E.g.:
+
+```jsx
+<CytoscapeComponent
+  elements={CytoscapeComponent.normalizeElements({
+    nodes: [
+      { data: { id: 'one', label: 'Node 1' }, position: { x: 0, y: 0 } },
+      { data: { id: 'two', label: 'Node 2' }, position: { x: 100, y: 0 } }
+    ],
+    edges: [
+      {
+        data: { source: 'one', target: 'two', label: 'Edge from Node1 to Node2' }
+      }
+    ]
+  })}
+/>
+```
+
+Note that `CytoscapeComponent.normalizeElements()` is useful only for plain-JSON data, such as an export from Cytoscape.js or the Cytoscape desktop software.  If you use [custom prop types](#custom-prop-types), such as Immutable, then you should flatten the elements yourself before passing the `elements` prop.
+
 ### `stylesheet`
 
 The Cytoscape stylesheet as non-stringified JSON. N.b. the prop key is `stylesheet` rather than `style`, the key used by Cytoscape itself, so as to not conflict with the HTML [`style`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/style) attribute. E.g.:

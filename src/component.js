@@ -18,6 +18,26 @@ export default class CytoscapeComponent extends React.Component {
     return defaults;
   }
 
+  static normalizeElements(elements) {
+    const isArray = elements.length != null;
+
+    if (isArray) {
+      return elements;
+    } else {
+      let { nodes, edges } = elements;
+
+      if (nodes == null) {
+        nodes = [];
+      }
+
+      if (edges == null) {
+        edges = [];
+      }
+
+      return nodes.concat(edges);
+    }
+  }
+
   constructor(props) {
     super(props);
   }
