@@ -5,6 +5,19 @@ The `react-cytoscapejs` package is an MIT-licensed [React](https://reactjs.org) 
 Most props of this component are [Cytoscape JSON](http://js.cytoscape.org/#core/initialisation).
 
 ## Usage
+### Setup
+
+install it:
+#### nmp
+```bash
+npm install react-cytoscapejs
+```
+
+#### yarn
+```bash
+yarn add react-cytoscapejs
+```
+
 
 The component is created by putting a `<CytoscapeComponent>` within the `render()` function of one of your apps's React components. Here is a minimal example:
 
@@ -29,7 +42,7 @@ class MyApp extends React.Component {
   }
 }
 
-ReactDOM.render( React.createElement(MyApp, document.getElementById('root') );
+ReactDOM.render( React.createElement(MyApp, document.getElementById('root')));
 ```
 
 ## `Basic props`
