@@ -5,15 +5,15 @@ The `react-cytoscapejs` package is an MIT-licensed [React](https://reactjs.org) 
 Most props of this component are [Cytoscape JSON](http://js.cytoscape.org/#core/initialisation).
 
 ## Usage
-### Setup
 
-install it:
-#### nmp
+### npm
+
 ```bash
 npm install react-cytoscapejs
 ```
 
-#### yarn
+### yarn
+
 ```bash
 yarn add react-cytoscapejs
 ```
