@@ -40,6 +40,7 @@ export default class CytoscapeComponent extends React.Component {
 
   constructor(props) {
     super(props);
+    this.displayName = `CytoscapeComponent`;
   }
 
   componentDidMount() {
