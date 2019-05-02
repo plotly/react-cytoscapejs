@@ -34,7 +34,7 @@ export default class CytoscapeComponent extends React.Component {
         edges = [];
       }
 
-      return nodes.concat(edges);
+      return [...nodes,...edges];
     }
   }
 
