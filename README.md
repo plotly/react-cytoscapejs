@@ -285,7 +285,7 @@ Return whether the two objects have equal value. This is used to determine if an
 
 ```js
 const diff(objectA, objectB){
-  return objectA === objectB; // immutable creates new objects for each operation
+  return objectA !== objectB; // immutable creates new objects for each operation
 }
 ```
 
