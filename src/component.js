@@ -59,7 +59,7 @@ export default class CytoscapeComponent extends React.Component {
       motionBlurOpacity: 0.2,
       wheelSensitivity: 1,
       pixelRatio: 'auto'
-    }
+    };
 
     // Merge with defaults and passed props
     const cy = (this._cy = new Cytoscape(Object.assign(cyOptions, options || {})));

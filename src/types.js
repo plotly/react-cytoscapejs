@@ -175,11 +175,8 @@ export const types = {
    *   }
    * }
    * ```
-   *
-   * See http://js.cytoscape.org/#layouts
    */
   options: oneOfType([object, any]),
-
 
   /**
    * If true, nodes automatically can not be grabbed regardless of whether
