@@ -157,6 +157,20 @@ class MyApp extends React.Component {
 }
 ```
 
+### `options`
+
+This prop exposes the options object for Cytoscape. This is only passed on component mount so any changes you make after the first render will not have an effect. A list of possible options is available in the [Cytoscape documentation](http://js.cytoscape.org/#core/initialisation)
+
+```jsx
+class MyApp extends React.Component {
+  render() {
+    return <CytoscapeComponent options={{
+          textureOnViewport: true
+    }}>;
+  }
+}
+```
+
 ## Viewport manipulation
 
 ### `pan`
