@@ -97,10 +97,9 @@ export const types = {
    * Register extensions by passing the extensions as an array, e.g.:
    *
    * ```
-   * import Cytoscape from 'cytoscape';
-   * import cxtmenu from 'cytoscape-cxtmenu';
    * import React from 'react';
    * import CytoscapeComponent from 'cytoscape-reactjs';
+   * import cxtmenu from 'cytoscape-cxtmenu';
    *
    * class MyApp extends React.Component {
    *   render() {
