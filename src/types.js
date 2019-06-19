@@ -94,6 +94,44 @@ export const types = {
   layout: oneOfType([object, any]),
 
   /**
+   * Register extensions by passing the extensions as an array, e.g.:
+   *
+   * ```
+   * import Cytoscape from 'cytoscape';
+   * import cxtmenu from 'cytoscape-cxtmenu';
+   * import React from 'react';
+   * import CytoscapeComponent from 'cytoscape-reactjs';
+   *
+   * class MyApp extends React.Component {
+   *   render() {
+   *     return (
+   *       <CytoscapeComponent 
+   *         extensions={[cxtmenu]}
+   *         cy={cy => {
+               cy.cxtmenu({
+                 selector: "core",
+                 commands: [
+                   {
+                     content: "Add",
+                     select: () => {
+                       console.log("add")
+                     },
+                     fillColor: "#0F0",
+                   },
+                 ],
+               })
+             }}
+   *       />
+   *     );
+   *   }
+   * }
+   * ```
+   *
+   * See http://js.cytoscape.org/#extensions
+   */
+  extensions: arrayOf(func),
+
+  /**
    * The panning position of the graph.
    *
    * See http://js.cytoscape.org/#init-opts/pan
