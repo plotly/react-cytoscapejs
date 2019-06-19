@@ -157,6 +157,31 @@ export const types = {
   boxSelectionEnabled: bool,
 
   /**
+   * Specify options object for Cytoscape
+   *
+   * See http://js.cytoscape.org/#core/initialisation
+   * 
+   * ```
+   * import Cytoscape from 'cytoscape';
+   * import React from 'react';
+   * import CytoscapeComponent from 'cytoscape-reactjs';
+   *
+   *
+   * class MyApp extends React.Component {
+   *   render() {
+   *     return <CytoscapeComponent options={{
+   *           textureOnViewport: true
+   *     }}>;
+   *   }
+   * }
+   * ```
+   *
+   * See http://js.cytoscape.org/#layouts
+   */
+  options: oneOfType([object, any]),
+
+
+  /**
    * If true, nodes automatically can not be grabbed regardless of whether
    * each node is marked as grabbable.
    *
