@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const { string, array, object, number, bool, oneOfType, any, func } = PropTypes;
+const { string, array, object, number, bool, oneOfType, any, func, arrayOf } = PropTypes;
 
 export const types = {
   /**
