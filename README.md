@@ -152,7 +152,7 @@ This prop allows for getting a reference to the Cytoscape `cy` reference using a
 ```jsx
 class MyApp extends React.Component {
   render() {
-    return <CytoscapeComponent cy={cy => this.cy = cy}>;
+    return <CytoscapeComponent cy={(cy) => { this.cy = cy }}>;
   }
 }
 ```
@@ -242,7 +242,7 @@ const elements = Immutable.List([
 Get the value of the specified `object` at the `key`, which may be an integer in the case of lists/arrays or strings in the case of maps/objects. E.g.:
 
 ```js
-const get(object, key) {
+const get = (object, key) => {
   // must check type because some props may be immutable and others may not be
   if (Immutable.Map.isMap(object) || Immutable.List.isList(object)) {
     return object.get(key);
@@ -255,7 +255,7 @@ const get(object, key) {
 The default is:
 
 ```js
-const get (object, key) => object[key];
+const get = (object, key) => object[key];
 ```
 
 ### `toJson(object)`
@@ -263,7 +263,7 @@ const get (object, key) => object[key];
 Get the deep value of the specified `object` as non-stringified JSON. E.g.:
 
 ```js
-const toJson(object){
+const toJson = (object) => {
   // must check type because some props may be immutable and others may not be
   if (Immutable.isImmutable(object)) {
     return object.toJSON();
@@ -276,7 +276,7 @@ const toJson(object){
 The default is:
 
 ```js
-const toJson(object) = object;
+const toJson = (object) => object;
 ```
 
 ### `diff(objectA, objectB)`
@@ -284,9 +284,7 @@ const toJson(object) = object;
 Return whether the two objects have equal value. This is used to determine if and where Cytoscape needs to be patched. E.g.:
 
 ```js
-const diff(objectA, objectB){
-  return objectA !== objectB; // immutable creates new objects for each operation
-}
+const diff = (objectA, objectB) => objectA !== objectB; // immutable creates new objects for each operation
 ```
 
 The default is a shallow equality check over the fields of each object. This means that if you use the default `diff()`, you should not use arrays or objects in an element's `data` or `scratch` fields.
@@ -298,9 +296,7 @@ Immutable benefits performance here by reducing the total number of `diff()` cal
 Call `iterator` on each element in the `list`, in order. E.g.:
 
 ```js
-const forEach(list, iterator){
-  return list.forEach(iterator); // same for immutable and js arrays
-}
+const forEach = (list, iterator) => list.forEach(iterator); // same for immutable and js arrays
 ```
 
 The above example is the same as the default `forEach()`.
@@ -312,7 +308,7 @@ The above example is the same as the default `forEach()`.
 The `cy` prop allows for getting a reference to the `cy` Cytoscape object, e.g.:
 
 ```jsx
-<CytoscapeComponent cy={cy => (myCyRef = cy)} />
+<CytoscapeComponent cy={(cy) => { myCyRef = cy }} />
 ```
 
 ## Change log
