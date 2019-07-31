@@ -10,13 +10,17 @@ Most props of this component are [Cytoscape JSON](http://js.cytoscape.org/#core/
 
 ```bash
 npm install react-cytoscapejs
+npm install cytoscape@3.x.y # your desired version, 3.2.19 or newer
 ```
 
 ### yarn
 
 ```bash
 yarn add react-cytoscapejs
+yarn add cytoscape@3.x.y # your desired version, 3.2.19 or newer
 ```
+
+Note that you must specify the desired version of `cytoscape` to be used.  Otherwise, you will get whatever version npm or yarn thinks best matches this package's compatible semver range -- which is currently `^3.2.19` or any version of 3 newer than or equal to 3.2.19.
 
 
 The component is created by putting a `<CytoscapeComponent>` within the `render()` function of one of your apps's React components. Here is a minimal example:
