@@ -67,9 +67,13 @@ const patchLayout = (cy, layout1, layout2, toJson) => {
 };
 
 const patchStyle = (cy, style1, style2, toJson) => {
-  cy.style()
-    .fromJson(toJson(style2))
-    .update();
+  const style = cy.style();
+
+  if (style == null) {
+    return;
+  }
+
+  style.fromJson(toJson(style2)).update();
 };
 
 const patchElements = (cy, eles1, eles2, toJson, get, forEach, diff) => {

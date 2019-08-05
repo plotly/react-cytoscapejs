@@ -210,5 +210,66 @@ export const types = {
    *
    * `<CytoscapeComponent cy={cy => (myCyRef = cy)} />`
    */
-  cy: func
+  cy: func,
+
+  /**
+   * headless
+   * The `headless` proper allows for setting whether the Cytoscape instance is headless, i.e.
+   * not rendered.  This value can not be changed after initialisation of the component.
+   */
+  headless: bool,
+
+  /**
+   * styleEnabled
+   * The `styleEnabled` flag is used to enable style functionality in a headless instance (i.e.
+   * `headless: true, styleEnabled: true`).  For a rendered instance, do not set this value.
+   */
+  styleEnabled: bool,
+
+  /**
+   * hideEdgesOnViewport
+   * A rendering hint that specifies, for renderers which support the hint, whether edges should
+   * be hidden during zoom and pan operations.
+   */
+  hideEdgesOnViewport: bool,
+
+  /**
+   * textureOnViewport
+   * A rendering hint that specifies, for renderers which support the hint, whether a preview
+   * based on the existing scene should be used in place of building a new scene.
+   */
+  textureOnViewport: bool,
+
+  /**
+   * motionBlur
+   * A rendering hint that specifies, for renderers which support the hint, whether a motion blur
+   * effect should be applied.
+   */
+  motionBlur: bool,
+
+  /**
+   * motionBlurOpacity
+   * A rendering hint that specifies, for renderers which support the hint, how strong the motion
+   * blur effect should be.  The value ranges from 0 to 1, with larger values indicating larger
+   * strength.
+   */
+  motionBlurOpacity: number,
+
+  /**
+   * wheelSensitivity
+   * A rendering hint that specifies, for renderers which support the hint, how fast wheel zooming
+   * should be.  The value is a positive multiplier.  Do not set this value unless you are using
+   * unconventional hardware and can guarantee that all your users will use the same hardware.  The
+   * default value works well for standard mice on common operating systems.  If you change this
+   * value, it is very likely that you will create a bad user experience for many or most of your
+   * users.
+   */
+  wheelSensitivity: number,
+
+  /**
+   * pixelRatio
+   * A rendering hint that specifies, for renderers which support the hint, the pixel ratio that
+   * should be used.  May be 'auto' or a positive number.
+   */
+  pixelRatio: oneOfType([string, object])
 };

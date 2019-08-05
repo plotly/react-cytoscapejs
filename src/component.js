@@ -45,8 +45,30 @@ export default class CytoscapeComponent extends React.Component {
 
   componentDidMount() {
     const container = ReactDOM.findDOMNode(this);
-    const { global } = this.props;
-    const cy = (this._cy = new Cytoscape({ container }));
+
+    const {
+      global,
+      headless,
+      styleEnabled,
+      hideEdgesOnViewport,
+      textureOnViewport,
+      motionBlur,
+      motionBlurOpacity,
+      wheelSensitivity,
+      pixelRatio
+    } = this.props;
+
+    const cy = (this._cy = new Cytoscape({
+      container,
+      headless,
+      styleEnabled,
+      hideEdgesOnViewport,
+      textureOnViewport,
+      motionBlur,
+      motionBlurOpacity,
+      wheelSensitivity,
+      pixelRatio
+    }));
 
     if (global) {
       window[global] = cy;
