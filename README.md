@@ -317,6 +317,8 @@ The `cy` prop allows for getting a reference to the `cy` Cytoscape object, e.g.:
 
 ## Change log
 
+- v1.2.1
+  - When patching, apply layout outside of batching.
 - v1.2.0
   - Add support for `headless`, `styleEnabled` and the following (canvas renderer) rendering hints: `hideEdgesOnViewport`, `textureOnViewport`, `motionBlur`, `motionBlurOpacity`, `wheelSensitivity`, `pixelRatio`
   - Add setup and version explanation to README
