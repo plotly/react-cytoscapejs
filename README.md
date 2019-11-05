@@ -144,7 +144,7 @@ class MyApp extends React.Component {
 
     const layout = { name: 'cose-bilkent' };
 
-    return <CytoscapeComponent elements={elements} layout={layout}>;
+    return <CytoscapeComponent elements={elements} layout={layout} />;
   }
 }
 ```
