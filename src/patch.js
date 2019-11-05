@@ -5,48 +5,53 @@ const isDiffAtKey = (json1, json2, diff, key) =>
   diff(atKey(json1, key), atKey(json2, key));
 
 export const patch = (cy, json1, json2, diff, toJson, get, forEach) => {
-  // The shallow object diff() must defer to patchElements() as it must compare the
-  // elements as an unordered set.  A custom diff(), with Immutable for example,
-  // could just use an equality check (===).
-  if (diff === shallowObjDiff || isDiffAtKey(json1, json2, diff, 'elements')) {
-    patchElements(
-      cy,
-      atKey(json1, 'elements'),
-      atKey(json2, 'elements'),
-      toJson,
-      get,
-      forEach,
-      diff
-    );
-  }
-
-  if (isDiffAtKey(json1, json2, diff, 'stylesheet')) {
-    patchStyle(
-      cy,
-      atKey(json1, 'stylesheet'),
-      atKey(json2, 'stylesheet'),
-      toJson
-    );
-  }
-
-  [
-    // simple keys that can be patched directly (key same as fn name)
-    'zoom',
-    'minZoom',
-    'maxZoom',
-    'zoomingEnabled',
-    'userZoomingEnabled',
-    'pan',
-    'panningEnabled',
-    'userPanningEnabled',
-    'boxSelectionEnabled',
-    'autoungrabify',
-    'autolock',
-    'autounselectify'
-  ].forEach(key => {
-    if (isDiffAtKey(json1, json2, diff, key)) {
-      patchJson(cy, key, atKey(json1, key), atKey(json2, key), toJson);
+  cy.batch(() => {
+    // The shallow object diff() must defer to patchElements() as it must compare the
+    // elements as an unordered set.  A custom diff(), with Immutable for example,
+    // could just use an equality check (===).
+    if (
+      diff === shallowObjDiff ||
+      isDiffAtKey(json1, json2, diff, 'elements')
+    ) {
+      patchElements(
+        cy,
+        atKey(json1, 'elements'),
+        atKey(json2, 'elements'),
+        toJson,
+        get,
+        forEach,
+        diff
+      );
     }
+
+    if (isDiffAtKey(json1, json2, diff, 'stylesheet')) {
+      patchStyle(
+        cy,
+        atKey(json1, 'stylesheet'),
+        atKey(json2, 'stylesheet'),
+        toJson
+      );
+    }
+
+    [
+      // simple keys that can be patched directly (key same as fn name)
+      'zoom',
+      'minZoom',
+      'maxZoom',
+      'zoomingEnabled',
+      'userZoomingEnabled',
+      'pan',
+      'panningEnabled',
+      'userPanningEnabled',
+      'boxSelectionEnabled',
+      'autoungrabify',
+      'autolock',
+      'autounselectify'
+    ].forEach(key => {
+      if (isDiffAtKey(json1, json2, diff, key)) {
+        patchJson(cy, key, atKey(json1, key), atKey(json2, key), toJson);
+      }
+    });
   });
 
   if (isDiffAtKey(json1, json2, diff, 'layout')) {
