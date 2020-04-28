@@ -39,7 +39,7 @@ class MyApp extends React.Component {
     const elements = [
        { data: { id: 'one', label: 'Node 1' }, position: { x: 0, y: 0 } },
        { data: { id: 'two', label: 'Node 2' }, position: { x: 100, y: 0 } },
-       { data: { source: 'one', target: 'two', label: 'Edge from Node1 to Node2' } }
+       { data: { id: 'one->two', source: 'one', target: 'two', label: 'Edge from Node1 to Node2' } }
     ];
 
     return <CytoscapeComponent elements={elements} style={ { width: '600px', height: '600px' } } />;
@@ -61,7 +61,7 @@ The flat list of [Cytoscape elements](http://js.cytoscape.org/#notation/elements
     { data: { id: 'one', label: 'Node 1' }, position: { x: 0, y: 0 } },
     { data: { id: 'two', label: 'Node 2' }, position: { x: 100, y: 0 } },
     {
-      data: { source: 'one', target: 'two', label: 'Edge from Node1 to Node2' }
+      data: { id: 'one->two', source: 'one', target: 'two', label: 'Edge from Node1 to Node2' }
     }
   ]}
 />
@@ -80,7 +80,7 @@ In order to make it easier to support passing in `elements` JSON in the `element
     ],
     edges: [
       {
-        data: { source: 'one', target: 'two', label: 'Edge from Node1 to Node2' }
+        data: { id: 'one->two', source: 'one', target: 'two', label: 'Edge from Node1 to Node2' }
       }
     ]
   })}
@@ -139,7 +139,7 @@ class MyApp extends React.Component {
     const elements = [
       { data: { id: 'one', label: 'Node 1' }, position: { x: 0, y: 0 } },
       { data: { id: 'two', label: 'Node 2' }, position: { x: 100, y: 0 } },
-      { data: { source: 'one', target: 'two', label: 'Edge from Node1 to Node2' } }
+      { data: { id: 'one->two', source: 'one', target: 'two', label: 'Edge from Node1 to Node2' } }
     ];
 
     const layout = { name: 'cose-bilkent' };
