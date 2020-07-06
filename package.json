@@ -12,6 +12,7 @@
   },
   "homepage": "https://github.com/plotly/react-cytoscapejs",
   "main": "./dist/react-cytoscape.js",
+  "module": "./src/index.js",
   "scripts": {
     "prepare": "run-s build:prod build:docgen",
     "bundle": "webpack",
@@ -53,13 +54,13 @@
     "mocha-chrome": "^1.1.0",
     "npm-run-all": "^4.1.1",
     "prettier": "^1.13.7",
-    "react": "^16.4.1",
+    "react": "^16.13.1",
     "react-docgen": "^2.21.0",
-    "react-dom": "^16.4.1",
+    "react-dom": "^16.13.1",
     "rimraf": "^2.6.2",
-    "webpack": "^4.15.1",
-    "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.9.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
     "webpack-serve": "^1.0.4"
   },
   "engines": {

@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
-
-const { string, array, object, number, bool, oneOfType, any, func } = PropTypes;
+import { string, array, object, number, bool, oneOfType, any, func } from 'prop-types';
 
 export const types = {
   /**

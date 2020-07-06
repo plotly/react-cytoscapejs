@@ -15,7 +15,7 @@ let conf = {
 
   devtool: isProd ? false : 'inline-source-map',
 
-  entry: './src/index.js',
+  entry: './src/bundle.js',
 
   output: {
     path: path.resolve(__dirname, 'dist'),
