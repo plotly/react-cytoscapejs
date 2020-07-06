@@ -12,6 +12,7 @@
   },
   "homepage": "https://github.com/plotly/react-cytoscapejs",
   "main": "./dist/react-cytoscape.js",
+  "module": "./src/index.js",
   "scripts": {
     "prepare": "run-s build:prod build:docgen",
     "bundle": "webpack",
