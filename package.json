@@ -31,8 +31,7 @@
     "demo": "cross-env NODE_ENV=development webpack-serve webpack.config.js --open --open-path demo.html"
   },
   "peerDependencies": {
-    "react": ">=15.0.0",
-    "react-dom": ">=15.0.0"
+    "react": ">=15.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
