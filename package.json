@@ -31,6 +31,7 @@
     "demo": "cross-env NODE_ENV=development webpack-serve webpack.config.js --open --open-path demo.html"
   },
   "peerDependencies": {
+    "cytoscape": "^3.2.19",
     "react": ">=15.0.0",
     "react-dom": ">=15.0.0"
   },
@@ -66,7 +67,6 @@
     "node": ">=8.11.3"
   },
   "dependencies": {
-    "cytoscape": "^3.2.19",
     "prop-types": "^15.6.2"
   }
 }
