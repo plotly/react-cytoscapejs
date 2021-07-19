@@ -67,7 +67,7 @@ The flat list of [Cytoscape elements](http://js.cytoscape.org/#notation/elements
 />
 ```
 
-N.b. arrays or objects should not be used in an `element`'s `data` or `scratch` fields, unless using a custom `diff()` prop.
+Note that arrays or objects should not be used in an `element`'s `data` or `scratch` fields, unless using a custom `diff()` prop.
 
 In order to make it easier to support passing in `elements` JSON in the `elements: { nodes: [], edges: [] }` format, there is a static function `CytoscapeComponent.normalizeElements()`.  E.g.:
 
@@ -91,7 +91,7 @@ Note that `CytoscapeComponent.normalizeElements()` is useful only for plain-JSON
 
 ### `stylesheet`
 
-The Cytoscape stylesheet as non-stringified JSON. N.b. the prop key is `stylesheet` rather than `style`, the key used by Cytoscape itself, so as to not conflict with the HTML [`style`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/style) attribute. E.g.:
+The Cytoscape stylesheet as non-stringified JSON. Note that the prop key is `stylesheet` rather than `style`, the key used by Cytoscape itself, so as to not conflict with the HTML [`style`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/style) attribute. E.g.:
 
 ```jsx
 <CytoscapeComponent
@@ -124,7 +124,7 @@ layout: {
 }
 ```
 
-N.b. to use an external [layout extension](http://js.cytoscape.org/#extensions/layout-extensions), you must register the extension prior to rendering this component, e.g.:
+To use an external [layout extension](http://js.cytoscape.org/#extensions/layout-extensions), you must register the extension prior to rendering this component, e.g.:
 
 ```jsx
 import Cytoscape from 'cytoscape';
