@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { types } from './types';
 import { defaults } from './defaults';
 import Cytoscape from 'cytoscape';
@@ -41,10 +40,11 @@ export default class CytoscapeComponent extends React.Component {
   constructor(props) {
     super(props);
     this.displayName = `CytoscapeComponent`;
+    this.containerRef = React.createRef();
   }
 
   componentDidMount() {
-    const container = ReactDOM.findDOMNode(this);
+    const container = this.containerRef.current;
 
     const {
       global,
@@ -100,6 +100,7 @@ export default class CytoscapeComponent extends React.Component {
     const { id, className, style } = this.props;
 
     return React.createElement('div', {
+      ref: this.containerRef,
       id,
       className,
       style
