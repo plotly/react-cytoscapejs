@@ -18,6 +18,7 @@ let conf = {
   entry: './src/index.js',
 
   output: {
+    globalObject: "this",
     path: path.resolve(__dirname, 'dist'),
     filename: 'react-cytoscape.js',
     library: 'ReactCytoscape',
