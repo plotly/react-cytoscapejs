@@ -5,16 +5,12 @@
     "node": true,
     "mocha": true
   },
-  "extends": "eslint:recommended",
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
-  "plugins": [],
-  "rules": {
-    "semi": "error"
-  }
+  "extends": [
+    "eslint:recommended",
+    "standard",
+    "prettier"
+  ],
+  "plugins": [
+    "prettier"
+  ]
 }

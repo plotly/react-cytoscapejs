@@ -39,7 +39,7 @@ export default class CytoscapeComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    this.displayName = `CytoscapeComponent`;
+    this.displayName = 'CytoscapeComponent';
     this.containerRef = React.createRef();
   }
 
@@ -55,7 +55,7 @@ export default class CytoscapeComponent extends React.Component {
       motionBlur,
       motionBlurOpacity,
       wheelSensitivity,
-      pixelRatio
+      pixelRatio,
     } = this.props;
 
     const cy = (this._cy = new Cytoscape({
@@ -67,7 +67,7 @@ export default class CytoscapeComponent extends React.Component {
       motionBlur,
       motionBlurOpacity,
       wheelSensitivity,
-      pixelRatio
+      pixelRatio,
     }));
 
     if (global) {
@@ -103,7 +103,7 @@ export default class CytoscapeComponent extends React.Component {
       ref: this.containerRef,
       id,
       className,
-      style
+      style,
     });
   }
 }

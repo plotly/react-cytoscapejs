@@ -46,8 +46,8 @@ export const patch = (cy, json1, json2, diff, toJson, get, forEach) => {
       'boxSelectionEnabled',
       'autoungrabify',
       'autolock',
-      'autounselectify'
-    ].forEach(key => {
+      'autounselectify',
+    ].forEach((key) => {
       if (isDiffAtKey(json1, json2, diff, key)) {
         patchJson(cy, key, atKey(json1, key), atKey(json2, key), toJson);
       }
@@ -87,19 +87,19 @@ const patchElements = (cy, eles1, eles2, toJson, get, forEach, diff) => {
   const toPatch = [];
   const eles1Map = {};
   const eles2Map = {};
-  const eles1HasId = id => eles1Map[id] != null;
-  const eles2HasId = id => eles2Map[id] != null;
-  const getEle1 = id => eles1Map[id];
-  const getId = ele => get(get(ele, 'data'), 'id');
+  const eles1HasId = (id) => eles1Map[id] != null;
+  const eles2HasId = (id) => eles2Map[id] != null;
+  const getEle1 = (id) => eles1Map[id];
+  const getId = (ele) => get(get(ele, 'data'), 'id');
 
-  forEach(eles2, ele2 => {
+  forEach(eles2, (ele2) => {
     const id = getId(ele2);
 
     eles2Map[id] = ele2;
   });
 
   if (eles1 != null) {
-    forEach(eles1, ele1 => {
+    forEach(eles1, (ele1) => {
       const id = getId(ele1);
 
       eles1Map[id] = ele1;
@@ -110,7 +110,7 @@ const patchElements = (cy, eles1, eles2, toJson, get, forEach, diff) => {
     });
   }
 
-  forEach(eles2, ele2 => {
+  forEach(eles2, (ele2) => {
     const id = getId(ele2);
     const ele1 = getEle1(id);
 
@@ -138,17 +138,17 @@ const patchElement = (cy, ele1, ele2, toJson, get, diff) => {
   const id = get(get(ele2, 'data'), 'id');
   const cyEle = cy.getElementById(id);
   const patch = {};
-  let jsonKeys = [
+  const jsonKeys = [
     'data',
     'position',
     'selected',
     'selectable',
     'locked',
     'grabbable',
-    'classes'
+    'classes',
   ];
 
-  jsonKeys.forEach(key => {
+  jsonKeys.forEach((key) => {
     const data2 = get(ele2, key);
 
     if (diff(data2, get(ele1, key))) {

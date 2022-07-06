@@ -271,5 +271,5 @@ export const types = {
    * A rendering hint that specifies, for renderers which support the hint, the pixel ratio that
    * should be used.  May be 'auto' or a positive number.
    */
-  pixelRatio: oneOfType([string, object])
+  pixelRatio: oneOfType([string, object]),
 };
