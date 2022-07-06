@@ -28,7 +28,7 @@
     "test:prettier": "prettier --list-different src/**",
     "test:prettier:fix": "prettier --write src/**",
     "test:mocha": "run-s build test:mocha:run",
-    "test:mocha:run": "mocha-chrome test/index.html",
+    "test:mocha:run": "mocha-chrome test/index.html --chrome-launcher.connectionPollInterval=2000 --chrome-launcher.maxConnectionRetries=300",
     "test": "run-s test:*",
     "watch": "microbundle watch --globals=react=React,cytoscape=cytoscape,prop-types=PropTypes",
     "start": "run-s watch"
