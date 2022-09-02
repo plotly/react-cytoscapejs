@@ -321,6 +321,7 @@ The `cy` prop allows for getting a reference to the `cy` Cytoscape object, e.g.:
   - BREAKING: Move `cytoscape` to peer dependencies for easier use in other packages. In particular, since you frequently need to explicitly call cytoscape functionality in your larger project, this helps ensure only one copy of it is loaded.
   - Change from `webpack` to `microbundle` (`rollup` based)
   - Update dependencies and lint configurations
+  - With thanks to @akx for the contribution
 - v1.2.1
   - When patching, apply layout outside of batching.
 - v1.2.0
