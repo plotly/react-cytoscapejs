@@ -1,1 +1,2 @@
-module.exports = require('./component').default;
+import Component from './component';
+export default Component;

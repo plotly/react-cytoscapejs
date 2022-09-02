@@ -1,5 +1,3 @@
-const typeofObj = typeof {};
-
 const eitherIsNil = (a, b) => a == null || b == null;
 
 export const hashDiff = (a, b) => {
@@ -17,13 +15,13 @@ export const shallowObjDiff = (a, b) => {
   }
 
   // non-object values can be compared with the equality operator
-  if (typeof a !== typeofObj || typeof b !== typeofObj) {
+  if (typeof a !== 'object' || typeof b !== 'object') {
     return a !== b;
   }
 
-  let aKeys = Object.keys(a);
-  let bKeys = Object.keys(b);
-  let mismatches = key => a[key] !== b[key];
+  const aKeys = Object.keys(a);
+  const bKeys = Object.keys(b);
+  const mismatches = (key) => a[key] !== b[key];
 
   if (aKeys.length !== bKeys.length) {
     return true;
