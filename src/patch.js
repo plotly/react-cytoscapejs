@@ -14,7 +14,6 @@ const patchJson = (cy, key, val1, val2, toJson) => {
 
 // Update the layout of the cytoscape instance if there's a difference
 const patchLayout = (cy, layout1, layout2, toJson) => {
-  if (deepEqual(layout1, layout2)) return;
 
   const layoutOpts = toJson(layout2);
 
@@ -43,6 +42,7 @@ const patchElements = (cy, eles1, eles2, toJson, get, forEach, diff) => {
   const eles1Map = {};
   const eles2Map = {};
   const getId = (ele) => get(get(ele, 'data'), 'id');
+  let isEdit = false;
 
   // Create a map of elements in eles2
   forEach(eles2, (ele2) => {
@@ -77,16 +77,21 @@ const patchElements = (cy, eles1, eles2, toJson, get, forEach, diff) => {
   // Remove, add, and patch elements in the cytoscape instance
   if (toRm.length > 0) {
     cy.remove(toRm);
+    isEdit = true;
   }
 
   if (toAdd.length > 0) {
     cy.add(toAdd);
+    isEdit = true;
   }
 
   toPatch.forEach(({ ele1, ele2 }) => {
     patchElement(cy, ele1, ele2, toJson, get, diff)
   }
   );
+  return {
+    isEdit,
+  }
 };
 
 // Update a single element in the cytoscape instance
@@ -144,12 +149,18 @@ export const patch = (cy, json1, json2, diff, toJson, get, forEach) => {
       'autounselectify',
     ];
 
+    let elementsChanged = false;
+    let styleChanged = false;
+
     // Check for differences in each key and apply the appropriate patch function
     keysToPatch.forEach((key) => {
+      
       if (isDiffAtKey(json1, json2, diff, key)) {
+        
         switch (key) {
           case 'elements':
-            patchElements(
+            
+            const { isEdit } = patchElements(
               cy,
               atKey(json1, 'elements'),
               atKey(json2, 'elements'),
@@ -158,6 +169,7 @@ export const patch = (cy, json1, json2, diff, toJson, get, forEach) => {
               forEach,
               diff
             );
+            elementsChanged = isEdit;
             break;
           case 'stylesheet':
             patchStyle(
@@ -166,6 +178,7 @@ export const patch = (cy, json1, json2, diff, toJson, get, forEach) => {
               atKey(json2, 'stylesheet'),
               toJson
             );
+            styleChanged = true;
             break;
           default:
             patchJson(cy, key, atKey(json1, key), atKey(json2, key), toJson);
@@ -173,10 +186,10 @@ export const patch = (cy, json1, json2, diff, toJson, get, forEach) => {
         }
       }
     });
-  });
 
-   // Update the layout if there's a difference
-  if (isDiffAtKey(json1, json2, diff, 'layout')) {
-    patchLayout(cy, atKey(json1, 'layout'), atKey(json2, 'layout'), toJson);
-  }
+    // Update the layout if there's a difference
+    if (isDiffAtKey(json1, json2, diff, 'layout') && elementsChanged) {
+      patchLayout(cy, atKey(json1, 'layout'), atKey(json2, 'layout'), toJson);
+    }
+  });
 };
