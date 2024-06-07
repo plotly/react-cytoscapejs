@@ -4,6 +4,12 @@ The `react-cytoscapejs` package is an MIT-licensed [React](https://reactjs.org) 
 
 Most props of this component are [Cytoscape JSON](http://js.cytoscape.org/#core/initialisation).
 
+<div align="center">
+  <a href="https://dash.plotly.com/project-maintenance">
+    <img src="https://dash.plotly.com/assets/images/maintained-by-plotly.png" width="400px" alt="Maintained by Plotly">
+  </a>
+</div>
+
 ## Usage
 
 ### npm
