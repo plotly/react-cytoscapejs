@@ -12,7 +12,7 @@
   },
   "amdName": "ReactCytoscape",
   "exports": "./dist/react-cytoscape.modern.js",
-  "main": "dist/react-cytoscape.cjs.js",
+  "main": "dist/react-cytoscape.js",
   "module": "dist/react-cytoscape.module.js",
   "source": "src/index.js",
   "umd:main": "dist/react-cytoscape.umd.js",
