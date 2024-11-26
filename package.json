@@ -34,7 +34,7 @@
     "start": "run-s watch"
   },
   "peerDependencies": {
-    "cytoscape": "^3.30.3",
+    "cytoscape": "^3.30.4",
     "react": ">=15.0.0"
   },
   "devDependencies": {
