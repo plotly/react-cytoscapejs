@@ -1,7 +1,7 @@
 /* global expect, ReactDOM, React, ReactCytoscape, cy, Immutable */
 
 (function() {
-  const { Map, List } = Immutable;
+  const { Map, List } = require('immutable');
 
   const isImmutable = obj => Map.isMap(obj) || List.isList(obj);
 

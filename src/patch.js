@@ -20,7 +20,7 @@ export const patch = (cy, json1, json2, diff, toJson, get, forEach) => {
         toJson,
         get,
         forEach,
-        diff
+        diff,
       );
     }
 
@@ -29,7 +29,7 @@ export const patch = (cy, json1, json2, diff, toJson, get, forEach) => {
         cy,
         atKey(json1, 'stylesheet'),
         atKey(json2, 'stylesheet'),
-        toJson
+        toJson,
       );
     }
 
@@ -130,7 +130,7 @@ const patchElements = (cy, eles1, eles2, toJson, get, forEach, diff) => {
   }
 
   toPatch.forEach(({ ele1, ele2 }) =>
-    patchElement(cy, ele1, ele2, toJson, get, diff)
+    patchElement(cy, ele1, ele2, toJson, get, diff),
   );
 };
 
